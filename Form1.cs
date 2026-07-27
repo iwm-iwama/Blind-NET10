@@ -1,21 +1,13 @@
-﻿using System;
-using System.Drawing;
-using System.Threading;
-using System.Windows.Forms;
-
-namespace iwm_Blind
+﻿namespace iwm_Blind
 {
 	public partial class Form1 : Form
 	{
-		///private const string COPYRIGHT = "(C)2021-2024 iwm-iwama";
-		///private const string VERSION = "iwm_Blind_20240102";
-
 		public Form1()
 		{
 			InitializeComponent();
 
 			// MouseWhell イベント追加
-			MouseWheel += new MouseEventHandler(Form_MouseWheel);
+			MouseWheel += new MouseEventHandler(Form_MouseWheel!);
 		}
 
 		private void Form1_Load(object sender, EventArgs e)
@@ -131,18 +123,16 @@ namespace iwm_Blind
 
 		private void Cms_背景色_Click(object sender, EventArgs e)
 		{
-			using (ColorDialog cd = new ColorDialog
+			using ColorDialog cd = new()
 			{
 				Color = BackColor,
 				AllowFullOpen = true,
 				SolidColorOnly = true,
-				CustomColors = new int[] { }
-			})
+				CustomColors = []
+			};
+			if (cd.ShowDialog() == DialogResult.OK)
 			{
-				if (cd.ShowDialog() == DialogResult.OK)
-				{
-					BackColor = cd.Color;
-				}
+				BackColor = cd.Color;
 			}
 		}
 
